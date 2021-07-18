@@ -14,13 +14,17 @@ function App() {
   const [date, setDate] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log("section", section);
-  console.log("date", date);
+  //const query = `fq=pub_date:("${date}")&news_desk:("${section}")`
+  //Posible solución seria hacer una función en la que se coja section y date, hacer un condicional para usar 
+  //sólo un botón de búsqueda, y que renderice la constante query en la barra de direcciones. 
+
+  console.log("section", section)
+  console.log("date", date)
 
   useEffect(() => {
     async function myFetch() {
       try {
-        let response = await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${section}&api-key=${process.env.REACT_APP_ASENGINE_API_KEY}`)
+        let response = await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${section}&${date}&api-key=${process.env.REACT_APP_ASENGINE_API_KEY}`)
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
